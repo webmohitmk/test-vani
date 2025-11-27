@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do List</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Todo List</h2>
+      <input type="text" id="inputField" onkeyup="clickToEnter(event)" />
+      <button onclick="AddTask()">Add Task</button>
+      <button onclick="removeAllTask()">Remove All Task</button>
+      <p id="errorMsg" style="color: red"></p>
+
+      <ul id="taskContainer"></ul>
+    </div>
+
+    <script>
+      //access elements :-
+
+      function AddTask() {
+        const inputField = document.getElementById("inputField").value.trim();
+        // console.log(inputField);
+
+        const errorMsg = document.getElementById("errorMsg");
+
+        if (inputField == "") {
+          //  return alert("enter any task")
+          return (errorMsg.innerText = "Please enter any Task");
+        }
+
+        const listItem = document.createElement("li");
+        // listItem.textContent = inputField
+        listItem.innerHTML = `${inputField} <button onclick ="this.parentNode.remove()"  > Remove </button>`;
+        // console.log(listItem)
+
+        const ul = document.getElementById("taskContainer");
+        ul.appendChild(listItem);
+
+        const inputTag = document.getElementById("inputField");
+        inputTag.value = "";
+
+        errorMsg.innerHTML = "";
+      }
+
+      function clickToEnter(e) {
+        if (e.key === "Enter") {
+          AddTask();
+        }
+      }
+
+      function removeAllTask() {
+        const ul = document.getElementById("taskContainer");
+        ul.innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
